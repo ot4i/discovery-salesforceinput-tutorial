@@ -130,7 +130,7 @@
                             "section": "2. A policy project named <span class='application'>SalesforcePolicyProject</span>"
                         },
 						{
-                            "section": "<span class='application'>ExampleSalesforceInput</span> contains two message flows named <span class='application'>ExampleSalesforceFlowInputFlow</span> and <span class='application'>ExampleSalesforceFlowRequestFlow</span>. To save you time, most of these two message flows have been developed and are configured ready for use, but the Salesforce Input node in <span class='application'>ExampleSalesforceFlowInputFlow</span> and the Salesforce Request node in <span class='application'>ExampleSalesforceFlowRequestFlow</span> have not yet been configured. This tutorial will guide you through the configuration of these two nodes. The <span class='application'>ExampleSalesforceFlowRequestFlow</span> flow is driven by an HTTP input containing any well-formed JSON data, and uses a FlowOrder node to first acknowledge the input by replying with a fixed message back to the requesting client. Second in the flow sequence, the Salesforce Request communicates with Salesforce to create a new contact. This node has its three output terminals (Failure, Out and NoData) wired to three separate Trace nodes to capture the results. When the contact is created, this will trigger the <span class='application'>ExampleSalesforceFlowInputFlow</span> flow using a Salesforce Input node. This node has its three output terminals (Failure, Out and Catch) wired to three separate Trace nodes to capture the results."
+                            "section": "<span class='application'>ExampleSalesforceInput</span> contains two message flows named <span class='application'>ExampleSalesforceFlowInputFlow</span> and <span class='application'>ExampleSalesforceRequestFlow</span>. To save you time, most of these two message flows have been developed and are configured ready for use, but the Salesforce Input node in <span class='application'>ExampleSalesforceInputFlow</span> and the Salesforce Request node in <span class='application'>ExampleSalesforceRequestFlow</span> have not yet been configured. This tutorial will guide you through the configuration of these two nodes. The <span class='application'>ExampleSalesforceRequestFlow</span> flow is driven by an HTTP input containing any well-formed JSON data, and uses a FlowOrder node to first acknowledge the input by replying with a fixed message back to the requesting client. Second in the flow sequence, the Salesforce Request communicates with Salesforce to create a new contact. This node has its three output terminals (Failure, Out and NoData) wired to three separate Trace nodes to capture the results. When the contact is created, this will trigger the <span class='application'>ExampleSalesforceInputFlow</span> flow using a Salesforce Input node. This node has its three output terminals (Failure, Out and Catch) wired to three separate Trace nodes to capture the results."
                         },						
                         {
 			    			"section": "<span class='application'>SalesforcePolicyProject</span> will be empty when first imported. Through the actions of the tutorial it will end up containing a single policy named <span class='application'>Salesforce1</span> which will be used by the two message flows in application <span class='application'>ExampleSalesforceInput</span>."							
@@ -227,10 +227,24 @@
 							},
 							{
                                  "details": "At the top of the window click the Save button, and you should see a confirmation message briefly appear. Close the Configure connector window and return to the Toolkit. <strong>It is important to remember this last step</strong> otherwise the vault will remain locked and you will be unable to start your integration server TEST_SERVER when you come to test the flow in the last section of the tutorial. You will now find that the properties of the Salesforce Request node in the message flow have been updated. Save the message flow.  Explore the properties of the Salesforce Request node. The Basic properties tab will now display a short description of <code>Create contact</code>, along with the <strong>Action</strong> (<code>CREATE</code>) and the <strong>object</strong> (<code>Contact</code>). On the Connection properties tab, the <strong>Policy</strong> will have been configured as <code>{SalesforcePolicyProject}:Salesforce1</code>."
-							}
+							}						
 						  ]
 						}
-					},					
+					},
+					{
+                       "section":"<b>Create a mapping using one of the discovered JSON schema</b>",
+						  "steps":
+                        {
+                          "type": "ordered",
+                          "details":
+                          [
+							{
+								"details": "In addition to configuring the properties of the Salesforce Request node, the discovery process will also have caused JSON schema files to have been generated in the project ExampleSalesforceInput. These JSON schemas represent the format of JSON messages which are expected to enter and leave the Salesforce Request node. Next we will configure the node Mapping1 using one of these schemas. Double click the node Mapping1, and stick  with the defaults shown on the first page of the wizard which is launched and click Next. On the next page, in the Select map outputs pane, expand ExampleSalesforceRequest and beneath it expand JSON Types and from the options select <code>ExampleSalesforceRequestFlow.Salesforce_Request.request.schema_JsonType - gen\\ExampleSalesforceRequestFlow.Salesforce_Request.request.schema.json</code> and click Finish. For a new contact creation, we will assign various properties of the contact using this map. Expand the message model, locate the following elements, and add Assigns with the following values:<br>Find element named <code>LastName</code> and assign the value <code>Normalverbraucher</code><br>Find element named <code>FirstName</code> and assign the value <code>Otto</code><br>Find element named <code>Department</code> and assign the value <code>Sales</code><br>Find element named <code>Phone</code> and assign the value <code>+44 999 1234567</code><br>Find element named <code>Email</code> and assign the value <code>OttoN@nospam.com</code><br>"
+							}
+							
+						  ]
+						}
+					},
 					{
                        "section":"<b>Run the Connector Discovery process for the Salesforce Input node</b>",
 						  "steps":
@@ -267,6 +281,12 @@
 							{
                                  "details": "At the top of the window click the Save button, and you should see a confirmation message briefly appear. Close the Configure connector window and return to the Toolkit. <strong>It is important to remember this last step</strong> otherwise the vault will remain locked and you will be unable to start your integration server TEST_SERVER when you come to test the flow in the last section of the tutorial. You will now find that the properties of the Salesforce Input node in the message flow have been updated. Save the message flow.  Explore the properties of the Salesforce Input node. The Basic properties tab will now display a short description of <code>New contact</code>, along with the <strong>Action</strong> (<code>CREATED</code>) and the <strong>object</strong> (<code>Contact</code>). On the Connection properties tab, the <strong>Policy</strong> will have been configured as <code>{SalesforcePolicyProject}:Salesforce1</code>."
 							}
+							
+							
+							
+							
+							
+							
 						  ]
 						}
 					}					
