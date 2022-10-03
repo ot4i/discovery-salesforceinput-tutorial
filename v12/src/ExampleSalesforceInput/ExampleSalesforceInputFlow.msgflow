@@ -6,9 +6,6 @@
     <colorGraphic16 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/ExampleSalesforceInput/icons/full/obj16/ExampleSalesforceInputFlow.gif"/>
     <colorGraphic32 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/ExampleSalesforceInput/icons/full/obj30/ExampleSalesforceInputFlow.gif"/>
     <composition>
-      <nodes xmi:type="ComIbmApplicationConnectorInput_salesforce.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="83,75" applicationConnectorType="salesforce" action="CREATED" businessObject="Contact" displayName="New contact" schemaPrefix="gen/ExampleSalesforceInputFlow.Salesforce_Input" policyUrl="{SalesforcePolicyProject}:Salesforce1" messageSetProperty="gen/ExampleSalesforceInputFlow.Salesforce_Input.response.schema.json">
-        <translation xmi:type="utility:ConstantString" string="Salesforce Input"/>
-      </nodes>
       <nodes xmi:type="ComIbmTrace.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_2" location="283,20" destination="file" filePath="C:\temp\TraceExampleSalesforceInputFlowFailure.txt" pattern="========== Trace Generated at ${CURRENT_TIMESTAMP} ==========&#xD;&#xA;${Root}&#xD;&#xA;${LocalEnvironment}&#xD;&#xA;${ExceptionList}&#xD;&#xA;==================================================">
         <translation xmi:type="utility:ConstantString" string="TraceFailure"/>
       </nodes>
@@ -18,9 +15,12 @@
       <nodes xmi:type="ComIbmTrace.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_4" location="283,74" destination="file" filePath="C:\temp\TraceExampleSalesforceInputFlowOut.txt" pattern="========== Trace Generated at ${CURRENT_TIMESTAMP} ==========&#xD;&#xA;${Root}&#xD;&#xA;${LocalEnvironment}&#xD;&#xA;${ExceptionList}&#xD;&#xA;==================================================">
         <translation xmi:type="utility:ConstantString" string="TraceOut"/>
       </nodes>
-      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_1" targetNode="FCMComposite_1_4" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
-      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_2" targetNode="FCMComposite_1_2" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.failure" targetTerminalName="InTerminal.in"/>
-      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_3" targetNode="FCMComposite_1_3" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.catch" targetTerminalName="InTerminal.in"/>
+      <nodes xmi:type="ComIbmApplicationConnectorInput_salesforce.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="71,74" applicationConnectorType="salesforce">
+        <translation xmi:type="utility:ConstantString" string="Salesforce Input"/>
+      </nodes>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_1" targetNode="FCMComposite_1_3" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.catch" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_2" targetNode="FCMComposite_1_4" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_3" targetNode="FCMComposite_1_2" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.failure" targetTerminalName="InTerminal.in"/>
     </composition>
     <propertyOrganizer/>
     <stickyBoard/>
